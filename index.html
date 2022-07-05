@@ -8,25 +8,24 @@
 </head>
 <body>
     <script>
+        const answers = ["Rock", "Paper", "Scissors"];
+        const playerSelection = prompt("Choose");
         function computerPlay() {
-            const answers = ["Rock", "Paper", "Scissors"];
              var random = answers[Math.floor(Math.random()* answers.length)]
-
         }
-        console.log(random);
-        function playerSelection() {
-           const selection = prompt("Choose:");
-           if (selection == "Rock") {
-            alert("God");
-           }
-
+      function playRound(playerSelection, computerSelection) {
+        computerSelection = computerPlay();
+        playerSelection = playerSelection;
+        if(computerSelection == playerSelection) {
+            alert("Tie!");
         }
-       function computerSelection() {
-        const computerSelection = computerPlay();
+            else if (computerSelection == "rock" && playerSelection == "paper") {
+                alert("Winner");
+            }
+         }
 
-       }
-
-
+      
+      playRound();
     </script>
 
 </body>
