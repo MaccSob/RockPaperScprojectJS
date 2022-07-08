@@ -1,12 +1,10 @@
-let computerSelection = ["Rock", "Paper", "Scissors"];
-let random = [Math.floor(Math.random()* computerSelection.length)]
-
+var random = ["rock", "paper", "scissors"];
+var playerSelection = prompt("Choose your weapon!")
+var computerSelection =  [Math.floor(Math.random()* random.length)];
     function computerPlay() {
-     return random;
+        return random = [Math.floor(Math.random()* random.length)];
 }
 function playRound(playerSelection, computerSelection) {
-playerSelection = prompt("Choose");
-computerSelection = computerPlay();
 if(playerSelection === computerSelection) {
     alert("Tie!")
 }
@@ -21,5 +19,5 @@ else if (computerSelection == "rock" && playerSelection == "paper")  {
 alert("You win!");
 }
 }
-
-console.log(random);
+console.log(computerSelection);
+playRound();
