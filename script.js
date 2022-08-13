@@ -1,57 +1,67 @@
-let playerSelection;
-let computerSelection;
-let pcScore = 0;
+const paper = document.getElementById("paper");
 let score = 0;
-let randomArray = ['rock', 'paper', 'scissors']
+let pcScore = 0;
+const rock = document.getElementById("rock");
+const scissors = document.getElementById("scissors");
+const scoreMess = document.getElementById("result"); 
+rock.addEventListener('click', function() {
+playRound("rock", computerPlay());
+});
+paper.addEventListener('click', function() {
+    playRound("paper", computerPlay());
+    });
+scissors.addEventListener('click', function() {
+        playRound("scissors", computerPlay());
+        });
+        
     function computerPlay() {
-        let random = randomArray[Math.floor(Math.random() * randomArray.length)]
-        return random;
+        let choices = ['rock', 'paper', 'scissors']
+    return choices[Math.floor(Math.random() * choices.length)]
     }
-function playRound(computerSelection, playerSelection) {
+function playRound(playerSelection, computerSelection) {
     score = score;
     pcScore = pcScore;
-     playerSelection = prompt("Rock,paper,scissors?");
+    let winner = ""
      computerSelection = computerPlay();
 
-if (computerSelection == playerSelection) {
-    alert("Tie");
+if (computerSelection === playerSelection) {
+    winner = "It's a tie!";
     }
- else if (computerSelection == "rock" && playerSelection == "scissors") {
-        (computerSelection == "paper" && playerSelection == "rock") &&
-        (computerSelection == "scissors" && playerSelection == "paper") 
+ else if (
+    (playerSelection == "rock" && computerSelection == "paper") ||
+    (playerSelection == "scissors" && computerSelection == "rock") ||
+    (playerSelection == "paper" && computerSelection == "scissors")
+  ) {
         pcScore = pcScore + 1;
-        alert("PC wins");
+        winner  = "computer";
 }
-else if (computerSelection == "rock" && playerSelection == "paper")  {
-(computerSelection == "paper" && playerSelection == "scissors") &&
-(computerSelection == "scissors" && playerSelection == "rock")
+else {
      score = score + 1;
-    alert("You win");
+    winner = "player";
 }
-
-
+console.log("Computer: " + computerSelection + ", Player: " + playerSelection + ", Winner: " + winner);
+showResults(playerSelection,computerSelection,winner,score, pcScore);
+declareWinner(winner,score,pcScore)
+console.log(score);
+console.log(pcScore);
 }
-function game() {
-    for (let i = 0; i < 5; i++) {
-        playRound(playerSelection, computerPlay());
-        console.log("Your score is : " + score)
-        console.log("Computer score is : " + pcScore);
-     }
-
+function showResults(playerSelection,computerSelection,winner,score, pcScore) {
+    if (winner === 'player') {
+        scoreMess.textContent = " You won! " + ( playerSelection ) + " beats " + ( computerSelection ) + " Current score: " + score;
+    } 
+    else if (winner === 'computer') {
+        scoreMess.textContent = " You lost! " + (computerSelection) + " beats " + (playerSelection) + " Current score: " + pcScore;
 
     }
-    
-     function results() {
-        if (score === pcScore) {
-            console.log("You guys are tied!");
-        }
-        else if (score > pcScore) {
-            console.log("You won more rounds! Nice!")
-        }
-        else if(pcScore > score) {
-            console.log("Crap! AI is taking over!")
-        }
-     }
-console.log(computerPlay());
-game();
-results();;
+    else if (playerSelection === computerSelection) {
+        scoreMess.textContent = "No winners here!";
+    }
+}
+function declareWinner(winner,score,pcScore) {
+    if (winner === 'player' && score === 5) {
+        alert("Great job! U won!");
+    }
+    else if (winner === 'computer' && pcScore === 5) {
+        alert("Dang! u Lost!");
+    }
+}
