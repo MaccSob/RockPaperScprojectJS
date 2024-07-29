@@ -2,8 +2,10 @@ const paper = document.getElementById("paper");
 let score = 0;
 let pcScore = 0;
 const rock = document.getElementById("rock");
+const ComputerScore = document.getElementById("pcpoints");
+const PlayerScore = document.getElementById("yourscore");
 const scissors = document.getElementById("scissors");
-const scoreMess = document.getElementById("result"); 
+const scoreMess = document.createElement("h5");
 rock.addEventListener('click', function() {
 playRound("rock", computerPlay());
 });
@@ -47,11 +49,10 @@ console.log(pcScore);
 }
 function showResults(playerSelection,computerSelection,winner,score, pcScore) {
     if (winner === 'player') {
-        scoreMess.textContent = " You won! " + ( playerSelection ) + " beats " + ( computerSelection ) + " Current score: " + score;
+        scoreMess.textContent = " You won! " + ( playerSelection ) + " beats " + ( computerSelection);
     } 
     else if (winner === 'computer') {
-        scoreMess.textContent = " You lost! " + (computerSelection) + " beats " + (playerSelection) + " Current score: " + pcScore;
-
+        scoreMess.textContent = " You lost! " + (computerSelection) + " beats " + (playerSelection);
     }
     else if (playerSelection === computerSelection) {
         scoreMess.textContent = "No winners here!";
@@ -64,4 +65,7 @@ function declareWinner(winner,score,pcScore) {
     else if (winner === 'computer' && pcScore === 5) {
         alert("Dang! u Lost!");
     }
-}
+    ComputerScore.textContent = "Computer Score: " + pcScore;
+    PlayerScore.textContent = " Your score: " + score;
+};
+document.body.appendChild(scoreMess);
